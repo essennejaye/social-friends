@@ -19,7 +19,7 @@ const ThoughtSchema = new Schema(
             type: String,
             required: 'You must enter your username'
         },
-        reactions:
+        reactions: 
             [ReactionSchema]
     },
     {

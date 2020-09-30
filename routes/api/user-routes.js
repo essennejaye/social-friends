@@ -21,7 +21,7 @@ router.route('/:id')
     .put(updateUser)
     .delete(deleteUser);
 
-// Set up Post and Delete for friend
+// Set up Post and Delete for friends
 router.route('/:userId/friends/:friendId')
     .post(addFriend)
     .delete(deleteFriend)

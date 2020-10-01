@@ -5,6 +5,8 @@ const userController = {
     getAllUser(req, res) {
         User.find({})
             .select('-__v')
+            .populate('friends')
+            .populate('thoughts')
             .sort({ _id: -1 })
             .then(dbUserData => res.json(dbUserData))
             .catch(err => {
@@ -16,9 +18,9 @@ const userController = {
     // get one by id
     getUserById({ params }, res) {
         User.findOne({ _id: params.id })
+            .select('-__v')
             .populate('friends')
             .populate('thoughts')
-            .select('-__v')
             .then(dbUserData => {
                 if (!dbUserData) {
                     res.status(404).json({ message: 'No User found with this id!' });
@@ -45,6 +47,8 @@ const userController = {
             { _id: params.id },
             body,
             { new: true, runValidators: true })
+            .populate('friends')
+            .populate('thoughts')
             .then(dbUserData => {
                 if (!dbUserData) {
                     res.status(404).json({ message: 'No User found with this id!' });
@@ -66,7 +70,12 @@ const userController = {
                     res.status(404).json({ message: 'No User found with this id!' });
                     return;
                 }
-                res.json(dbUserData);
+                Thought.deleteMany({
+                    _id: { $in: dbUserData.thoughts }
+                })
+                    .then(() => {
+                        return res.json({ message: ' User and thoughts successfully deleted!' });
+                    })
             })
             .catch(err => {
                 console.log(err);

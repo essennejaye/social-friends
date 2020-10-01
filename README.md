@@ -100,7 +100,7 @@ router.route('/:thoughtId/reactions/:reactionId')
 ```
 ### Walkthrough Video link
 
-![](https://drive.google.com/file/d/1CPp9fyiImlirwGWfHuXq0L5ebaNfaiR4/view?usp=sharing)
+https://drive.google.com/file/d/1CPp9fyiImlirwGWfHuXq0L5ebaNfaiR4/view?usp=sharing
 
 ### Screenshots
 
